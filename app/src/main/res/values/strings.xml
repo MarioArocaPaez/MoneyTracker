@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">MoneyTrackerProject</string>
+
+    <string-array name="items">
+        <item>Car</item>
+        <item>House</item>
+        <item>Food</item>
+        <item>Communication</item>
+        <item>Sport</item>
+        <item>Entertainment</item>
+        <item>Bills</item>
+        <item>Hygiene</item>
+        <item>Pets</item>
+        <item>Presents</item>
+        <item>Restaurants</item>
+        <item>Clothes</item>
+        <item>Health</item>
+        <item>Taxi</item>
+        <item>Transportation</item>
+        <item>Other</item>
+    </string-array>
+</resources>
