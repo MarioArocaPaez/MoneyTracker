@@ -42,7 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|end"
-                android:layout_margin="15dp"
+                android:layout_margin="20dp"
                 android:src="@drawable/plus"
                 app:backgroundTint="#0000"
                 app:fabSize="normal" />

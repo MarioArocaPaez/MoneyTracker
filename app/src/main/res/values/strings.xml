@@ -2,6 +2,7 @@
     <string name="app_name">MoneyTrackerProject</string>
 
     <string-array name="items">
+        <item>Select item</item>
         <item>Car</item>
         <item>House</item>
         <item>Food</item>
