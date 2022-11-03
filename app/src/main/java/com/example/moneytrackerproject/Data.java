@@ -6,18 +6,18 @@ public class Data {
     private String date;
     private String id;
     private String notes;
-    private int amount;
+    private int quantity;
 
     public Data(){
 
     }
 
-    public Data(String item, String date, String id, String notes, int amount) {
+    public Data(String item, String date, String id, String notes, int quantity) {
         this.item = item;
         this.date = date;
         this.id = id;
         this.notes = notes;
-        this.amount = amount;
+        this.quantity = quantity;
     }
 
     public String getItem() {
@@ -52,11 +52,11 @@ public class Data {
         this.notes = notes;
     }
 
-    public int getAmount() {
-        return amount;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setAmount(int amount) {
-        this.amount = amount;
+    public void setAmount(int quantity) {
+        this.quantity = quantity;
     }
 }
