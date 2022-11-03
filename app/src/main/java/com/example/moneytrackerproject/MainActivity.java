@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         fab = findViewById(R.id.floatAcBut);
 
         mAuth = FirebaseAuth.getInstance();
-        onlineUserId = mAuth.getCurrentUser().getUid();
+        //onlineUserId = mAuth.getCurrentUser().getUid();
         ref = FirebaseDatabase.getInstance().getReference().child("expenses").child(onlineUserId);
         //loader = new ProgressBar(this); //TODO: implement progress bar (https://stackoverflow.com/questions/45373007/progressdialog-is-deprecated-what-is-the-alternate-one-to-use)
 
