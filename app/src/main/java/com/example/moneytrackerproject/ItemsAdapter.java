@@ -40,8 +40,56 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder>{
         holder.date.setText("Date: " + data.getDate());
         holder.notes.setText("Notes: " + data.getNotes());
 
-        //TODO: Add operation to add images of each item
-        holder.imageView.setImageResource(R.drawable.home);
+        switch (data.getItem()){
+            case "Car":
+                holder.imageView.setImageResource(R.drawable.car);
+                break;
+            case "House":
+                holder.imageView.setImageResource(R.drawable.home);
+                break;
+            case "Food":
+                holder.imageView.setImageResource(R.drawable.food);
+                break;
+            case "Communication":
+                holder.imageView.setImageResource(R.drawable.communication);
+                break;
+            case "Sport":
+                holder.imageView.setImageResource(R.drawable.sport);
+                break;
+            case "Entertainment":
+                holder.imageView.setImageResource(R.drawable.entertainment);
+                break;
+            case "Bills":
+                holder.imageView.setImageResource(R.drawable.bills);
+                break;
+            case "Hygiene":
+                holder.imageView.setImageResource(R.drawable.hygiene);
+                break;
+            case "Pets":
+                holder.imageView.setImageResource(R.drawable.pets);
+                break;
+            case "Presents":
+                holder.imageView.setImageResource(R.drawable.presents);
+                break;
+            case "Restaurants":
+                holder.imageView.setImageResource(R.drawable.restaurants);
+                break;
+            case "Clothes":
+                holder.imageView.setImageResource(R.drawable.clothes);
+                break;
+            case "Health":
+                holder.imageView.setImageResource(R.drawable.health);
+                break;
+            case "Taxi":
+                holder.imageView.setImageResource(R.drawable.taxi);
+                break;
+            case "Transportation":
+                holder.imageView.setImageResource(R.drawable.transportation);
+                break;
+            case "Other":
+                holder.imageView.setImageResource(R.drawable.others);
+                break;
+        }
     }
 
     @Override
