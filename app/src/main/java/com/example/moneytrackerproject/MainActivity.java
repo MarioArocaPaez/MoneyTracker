@@ -101,10 +101,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 dataList.clear();
-                for(DataSnapshot dataSnapshot: snapshot.getChildren()){
-                    Data data = snapshot.getValue(Data.class);
+                for(DataSnapshot ds: snapshot.getChildren()){
+                    Data data = ds.getValue(Data.class);
                     dataList.add(data);
                 }
+
 
                 itemsAdapter.notifyDataSetChanged();
 
