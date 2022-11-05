@@ -49,8 +49,8 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference ref;
     private String onlineUserId = "";
 
-    public ItemsAdapter itemsAdapter;
-    public List<Data> dataList;
+    private ItemsAdapter itemsAdapter;
+    private List<Data> dataList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
         Calendar cal = Calendar.getInstance();
         String date = dateFormat.format(cal.getTime());
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("expenses");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("user");
         Query query = reference.orderByChild("date").equalTo(date);
         query.addValueEventListener(new ValueEventListener() {
             @Override
@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
                 int totalQuantity = 0;
                 for(DataSnapshot ds: snapshot.getChildren()){
                     Map<String,Object> map = (Map<String, Object>) ds.getValue();
-                    Object total = map.get("amount");
+                    Object total = map.get("quantity");
                     int pTotal = Integer.parseInt(String.valueOf(total));
                     totalQuantity += pTotal;
 

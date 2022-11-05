@@ -35,12 +35,13 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder>{
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         final Data data = dataList.get(position);
-        //holder.item.setText("Item: " + data.getItem());
+        holder.item.setText("Item: " + data.getItem());
         holder.quantity.setText("Spent: " + data.getQuantity());
         holder.date.setText("Date: " + data.getDate());
         holder.notes.setText("Notes: " + data.getNotes());
 
         //TODO: Add operation to add images of each item
+        holder.imageView.setImageResource(R.drawable.home);
     }
 
     @Override
@@ -63,6 +64,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder>{
             quantity = itemView.findViewById(R.id.quantity);
             date = itemView.findViewById(R.id.date);
             notes = itemView.findViewById(R.id.note);
+            imageView = itemView.findViewById(R.id.imageView);
         }
     }
 }
