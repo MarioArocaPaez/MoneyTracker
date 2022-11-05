@@ -35,7 +35,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder>{
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         final Data data = dataList.get(position);
-        holder.item.setText("Item: " + data.getItem());
+        //holder.item.setText("Item: " + data.getItem());
         holder.quantity.setText("Spent: " + data.getQuantity());
         holder.date.setText("Date: " + data.getDate());
         holder.notes.setText("Notes: " + data.getNotes());

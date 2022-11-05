@@ -15,7 +15,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#000"
+            android:background="#c3e8bd"
             android:elevation="5dp"/>
 
         <TextView
@@ -44,7 +44,7 @@
                 android:layout_gravity="bottom|end"
                 android:layout_margin="20dp"
                 android:src="@drawable/plus"
-                app:backgroundTint="#0000"
+                app:backgroundTint="#c3e8bd"
                 app:fabSize="normal" />
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
     </LinearLayout>

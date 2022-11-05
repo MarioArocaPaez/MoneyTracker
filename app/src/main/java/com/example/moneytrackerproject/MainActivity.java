@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private DatabaseReference ref;
-    private String onlineUserId = "";
+    //private String onlineUserId = "";
     //private ProgressBar loader;
 
     public ItemsAdapter itemsAdapter;
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         //onlineUserId = mAuth.getCurrentUser().getUid();
-        ref = FirebaseDatabase.getInstance().getReference().child("expenses").child(onlineUserId);
+        ref = FirebaseDatabase.getInstance().getReference();
         //loader = new ProgressBar(this); //TODO: implement progress bar (https://stackoverflow.com/questions/45373007/progressdialog-is-deprecated-what-is-the-alternate-one-to-use)
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
         Calendar cal = Calendar.getInstance();
         String date = dateFormat.format(cal.getTime());
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("expenses").child(onlineUserId);
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("expenses");
         Query query = reference.orderByChild("date").equalTo(date);
         query.addValueEventListener(new ValueEventListener() {
             @Override
@@ -149,8 +149,8 @@ public class MainActivity extends AppCompatActivity {
 
         final EditText amount = myView.findViewById(R.id.amount);
         final EditText notes = myView.findViewById(R.id.note);
-        final Button saveBtn = myView.findViewById(R.id.save);
-        final Button cancelBtn = myView.findViewById(R.id.cancel);
+        Button saveBtn = myView.findViewById(R.id.save);
+        Button cancelBtn = myView.findViewById(R.id.cancel);
 
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -164,18 +164,26 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
 
-                if (item.equals("Select item")) {
+                if(notes.equals("")){
+                    notes.setError("Notes required");
+                    return;
+                }
+
+                if (item.equalsIgnoreCase("Select item")) {
                     Toast.makeText(MainActivity.this, "Select a valid item", Toast.LENGTH_SHORT).show();
                 }
 
                 else {
-                    String id = ref.push().getKey();
+                    //TODO: add progressBar methods
 
+                    String id = ref.push().getKey();
                     DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
                     Calendar cal = Calendar.getInstance();
                     String date = dateFormat.format(cal.getTime());
 
+
                     Data data = new Data(item, date, id, mNotes, Integer.parseInt(mAmount));
+                    ref.child("expenses").child(id).setValue(data);
                     ref.child(id).setValue(data).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
