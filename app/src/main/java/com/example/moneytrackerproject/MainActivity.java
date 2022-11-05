@@ -47,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private DatabaseReference ref;
-    //private String onlineUserId = "";
-    //private ProgressBar loader;
+    private String onlineUserId = "";
+    private ProgressBar loader;
 
     public ItemsAdapter itemsAdapter;
     public List<Data> dataList;
@@ -57,19 +57,20 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        //Setting up the toolbar to have Balance written on it
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Balance");
-
+        //Set up quantity text, recycleView and float act but
         quantityTextView = findViewById(R.id.totalQuantitySpent);
         recyclerView = findViewById(R.id.recyclerView);
         fab = findViewById(R.id.floatAcBut);
 
         mAuth = FirebaseAuth.getInstance();
         //onlineUserId = mAuth.getCurrentUser().getUid();
-        ref = FirebaseDatabase.getInstance().getReference();
+        ref = FirebaseDatabase.getInstance().getReference().child("user").child(onlineUserId);
         //loader = new ProgressBar(this); //TODO: implement progress bar (https://stackoverflow.com/questions/45373007/progressdialog-is-deprecated-what-is-the-alternate-one-to-use)
+        loader = new ProgressBar(this);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,11 +147,11 @@ public class MainActivity extends AppCompatActivity {
                 android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.items));
         itemsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         itemsSpinner.setAdapter(itemsAdapter);
-
+        //TODO: Change amount to quantity
         final EditText amount = myView.findViewById(R.id.amount);
         final EditText notes = myView.findViewById(R.id.note);
-        Button saveBtn = myView.findViewById(R.id.save);
-        Button cancelBtn = myView.findViewById(R.id.cancel);
+        final Button saveBtn = myView.findViewById(R.id.save);
+        final Button cancelBtn = myView.findViewById(R.id.cancel);
 
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -165,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 if(notes.equals("")){
-                    notes.setError("Notes required");
+                    notes.setError("Notes required!");
                     return;
                 }
 
@@ -175,25 +176,34 @@ public class MainActivity extends AppCompatActivity {
 
                 else {
                     //TODO: add progressBar methods
+                    /*loader.setMessage("Adding");
+                    loader.setCanceledOnTouchOutside(false);
+                    loader.show();*/
 
-                    String id = ref.push().getKey();
+
+                    String id = "sdfsdfsdf";
                     DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
                     Calendar cal = Calendar.getInstance();
                     String date = dateFormat.format(cal.getTime());
 
 
                     Data data = new Data(item, date, id, mNotes, Integer.parseInt(mAmount));
-                    ref.child("expenses").child(id).setValue(data);
-                    ref.child(id).setValue(data).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+                    ref.push().setValue(data);
+                    Toast.makeText(MainActivity.this, "Data inserted", Toast.LENGTH_SHORT).show();
+
+                    /*ref.child(id).setValue(data).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
+                            /*if (task.isSuccessful()) {
                                 Toast.makeText(MainActivity.this, "Item added successfully", Toast.LENGTH_SHORT).show();
                             }else{
                                 Toast.makeText(MainActivity.this, "Failed to add note", Toast.LENGTH_SHORT).show();
                             }
+                            //loader.dismiss();
+
                         }
-                    });
+                    });*/
                 }
                 dialog.dismiss();
             }
