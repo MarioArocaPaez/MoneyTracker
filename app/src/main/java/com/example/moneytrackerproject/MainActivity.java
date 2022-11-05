@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference ref;
     private String onlineUserId = "";
-    private ProgressBar loader;
 
     public ItemsAdapter itemsAdapter;
     public List<Data> dataList;
@@ -67,10 +66,7 @@ public class MainActivity extends AppCompatActivity {
         fab = findViewById(R.id.floatAcBut);
 
         mAuth = FirebaseAuth.getInstance();
-        //onlineUserId = mAuth.getCurrentUser().getUid();
         ref = FirebaseDatabase.getInstance().getReference().child("user").child(onlineUserId);
-        //loader = new ProgressBar(this); //TODO: implement progress bar (https://stackoverflow.com/questions/45373007/progressdialog-is-deprecated-what-is-the-alternate-one-to-use)
-        loader = new ProgressBar(this);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -175,13 +171,8 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 else {
-                    //TODO: add progressBar methods
-                    /*loader.setMessage("Adding");
-                    loader.setCanceledOnTouchOutside(false);
-                    loader.show();*/
 
-
-                    String id = "sdfsdfsdf";
+                    String id = ref.push().getKey();
                     DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
                     Calendar cal = Calendar.getInstance();
                     String date = dateFormat.format(cal.getTime());
@@ -189,21 +180,16 @@ public class MainActivity extends AppCompatActivity {
 
                     Data data = new Data(item, date, id, mNotes, Integer.parseInt(mAmount));
 
-                    ref.push().setValue(data);
-                    Toast.makeText(MainActivity.this, "Data inserted", Toast.LENGTH_SHORT).show();
-
-                    /*ref.child(id).setValue(data).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    ref.child(id).setValue(data).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                            /*if (task.isSuccessful()) {
+                            if (task.isSuccessful()) {
                                 Toast.makeText(MainActivity.this, "Item added successfully", Toast.LENGTH_SHORT).show();
                             }else{
                                 Toast.makeText(MainActivity.this, "Failed to add note", Toast.LENGTH_SHORT).show();
                             }
-                            //loader.dismiss();
-
                         }
-                    });*/
+                    });
                 }
                 dialog.dismiss();
             }
