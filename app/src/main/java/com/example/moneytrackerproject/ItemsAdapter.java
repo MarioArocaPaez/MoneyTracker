@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+// The objective of ItemsAdapter is to display the information of the items given in dataList into
+// the retrieve_layout.
 public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder>{
 
     private Context context;

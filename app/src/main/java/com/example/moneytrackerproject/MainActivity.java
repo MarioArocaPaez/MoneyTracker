@@ -40,12 +40,12 @@ import java.util.Queue;
 
 public class MainActivity extends AppCompatActivity {
 
+    // Declaration of variables used to create activity
     private Toolbar toolbar;
     private TextView quantityTextView;
     private RecyclerView recyclerView;
     private FloatingActionButton fab;
 
-    private FirebaseAuth mAuth;
     private DatabaseReference ref;
     private String onlineUserId = "";
 
@@ -56,18 +56,22 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         //Setting up the toolbar to have Balance written on it
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Balance");
-        //Set up quantity text, recycleView and float act but
+
+        //Set up quantity text, recycleView and float action button
         quantityTextView = findViewById(R.id.totalQuantitySpent);
         recyclerView = findViewById(R.id.recyclerView);
         fab = findViewById(R.id.floatAcBut);
 
-        mAuth = FirebaseAuth.getInstance();
+        // Getting reference for database instance
         ref = FirebaseDatabase.getInstance().getReference().child("user").child(onlineUserId);
 
+
+        // Define behaviour of float action button when clicked
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,12 +79,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Setting linear layout manager for the recycler view
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setReverseLayout(true);
         linearLayoutManager.setStackFromEnd(true);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(linearLayoutManager);
 
+        // Creating an instance of ItemsAdapter object and setting it as the recyclerView adapter
         dataList = new ArrayList<>();
         itemsAdapter = new ItemsAdapter(MainActivity.this, dataList);
         recyclerView.setAdapter(itemsAdapter);
@@ -89,14 +95,19 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    // Method to retrieve the items from the Firebase database and display them on the retrieve
+    // layout through the itemsAdapter, ordered by date.
     private void readItems(){
 
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         Calendar cal = Calendar.getInstance();
         String date = dateFormat.format(cal.getTime());
 
+        // Retrieving the items from the database
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("user");
-        Query query = reference.orderByChild("date").equalTo(date);
+        Query query = reference.orderByChild("date");
+
+        // Updating the dataList Array with the existing items
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -106,9 +117,10 @@ public class MainActivity extends AppCompatActivity {
                     dataList.add(data);
                 }
 
-
+                // Notify the adapter about the new items
                 itemsAdapter.notifyDataSetChanged();
 
+                // Update the balance
                 int totalQuantity = 0;
                 for(DataSnapshot ds: snapshot.getChildren()){
                     Map<String,Object> map = (Map<String, Object>) ds.getValue();
@@ -128,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    // Method to display the input dialog for a new item
+    // Method to display the input dialog for adding a new item and update the database
     private void addItemSpentOn() {
         AlertDialog.Builder myDialog = new AlertDialog.Builder(this);
         LayoutInflater inflater = LayoutInflater.from(this);
@@ -150,6 +162,7 @@ public class MainActivity extends AppCompatActivity {
         final Button saveBtn = myView.findViewById(R.id.save);
         final Button cancelBtn = myView.findViewById(R.id.cancel);
 
+        // Define the save button behaviour
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -157,6 +170,7 @@ public class MainActivity extends AppCompatActivity {
                 String mNotes = notes.getText().toString();
                 String item = itemsSpinner.getSelectedItem().toString();
 
+                // Define behaviour in case any field is empty
                 if (mAmount.isEmpty()){
                     amount.setError("Amount required!");
                     return;
@@ -171,6 +185,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Select a valid item", Toast.LENGTH_SHORT).show();
                 }
 
+                // Create Data object for new item and save it in the database
                 else {
 
                     String id = ref.push().getKey();
@@ -196,6 +211,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Define the cancel button behaviour
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

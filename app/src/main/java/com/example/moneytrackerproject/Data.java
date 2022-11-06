@@ -1,5 +1,6 @@
 package com.example.moneytrackerproject;
 
+// The Data object stores the information of each spending instance
 public class Data {
 
     private String item;
