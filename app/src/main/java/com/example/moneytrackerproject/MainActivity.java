@@ -99,10 +99,6 @@ public class MainActivity extends AppCompatActivity {
     // layout through the itemsAdapter, ordered by date.
     private void readItems(){
 
-        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        Calendar cal = Calendar.getInstance();
-        String date = dateFormat.format(cal.getTime());
-
         // Retrieving the items from the database
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("user");
         Query query = reference.orderByChild("date");
