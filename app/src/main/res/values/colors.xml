@@ -7,4 +7,30 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="colorPrimary">#024290</color>
+    <color name="colorPrimaryDark">#022365</color>
+    <color name="colorAccent">#05af9b</color>
+
+    <color name="color_one">#fb7268</color>
+    <color name="color_white">#ededf2</color>
+    <color name="color_two">#E3E0E0</color>
+
+    <color name="Car">#F44336</color>
+    <color name="House">#E91E63</color>
+    <color name="Food">#9C27B0</color>
+    <color name="Communication">#673AB7</color>
+    <color name="Sport">#3F51B5</color>
+    <color name="Entertainment">#2196F3</color>
+    <color name="Bills">#F5013D59</color>
+    <color name="Hygiene">#00BCD4</color>
+    <color name="Pets">#009688</color>
+    <color name="Presents">#4CAF50</color>
+    <color name="Restaurants">#8BC34A</color>
+    <color name="Clothes">#CDDC39</color>
+    <color name="Health">#4C460E</color>
+    <color name="Taxi">#FFC107</color>
+    <color name="Transportation">#FF9800</color>
+    <color name="Other">#FF5722</color>
+
 </resources>

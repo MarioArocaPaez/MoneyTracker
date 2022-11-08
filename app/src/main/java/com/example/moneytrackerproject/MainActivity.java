@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -50,7 +52,9 @@ public class MainActivity extends AppCompatActivity {
     private String onlineUserId = "";
 
     private ItemsAdapter itemsAdapter;
-    private List<Data> dataList;
+    public static List<Data> dataList;
+
+    Button btnChangeAct;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         //Setting up the toolbar to have Balance written on it
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Balance");
+        getSupportActionBar().setTitle("Money Tracker");
 
         //Set up quantity text, recycleView and float action button
         quantityTextView = findViewById(R.id.totalQuantitySpent);
@@ -90,6 +94,17 @@ public class MainActivity extends AppCompatActivity {
         dataList = new ArrayList<>();
         itemsAdapter = new ItemsAdapter(MainActivity.this, dataList);
         recyclerView.setAdapter(itemsAdapter);
+
+        btnChangeAct = findViewById(R.id.btnChangeAct);
+
+        btnChangeAct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(MainActivity.this, MainActivity2.class);
+                startActivity(intent);
+            }
+        });
 
         readItems();
 

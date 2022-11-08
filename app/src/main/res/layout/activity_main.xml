@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Balance: 0€"
-            android:textSize="20sp"
+            android:textSize="23sp"
             android:textStyle="bold"
             android:textColor="#000"
             android:gravity="center"
@@ -42,11 +42,50 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|end"
-                android:layout_margin="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="70dp"
                 android:src="@drawable/plus"
                 app:backgroundTint="#c3e8bd"
                 app:fabSize="normal" />
+
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_gravity="bottom">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="2"
+                    android:orientation="horizontal">
+
+                    <Button android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_margin="5dp"
+                        android:backgroundTint="#c3e8bd"
+                        android:textColor="@color/black"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:text="Expenses"/>
+
+                    <Button
+                        android:id="@+id/btnChangeAct"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_margin="5dp"
+                        android:backgroundTint="#c3e8bd"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:text="Stats"/>
+                </LinearLayout>
+
+            </androidx.appcompat.widget.Toolbar>
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
     </LinearLayout>
 
 </LinearLayout>
