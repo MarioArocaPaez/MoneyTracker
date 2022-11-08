@@ -108,6 +108,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder>{
                 break;
         }
 
+        // Setting the behaviour of each item to display an update layout when clicked
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -121,6 +122,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder>{
         });
     }
 
+    // Method to allow changes in the data of a certain item
     private void updateData() {
         AlertDialog.Builder myDialog = new AlertDialog.Builder(context);
         LayoutInflater inflater = LayoutInflater.from(context);
@@ -145,6 +147,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder>{
         Button updateBtn = myView.findViewById(R.id.update);
         Button deleteBtn = myView.findViewById(R.id.delete);
 
+        // Update a certain expense's information
         updateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -170,6 +173,26 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder>{
                 dialog.dismiss();
             }
         });
+
+        // Delete an expense
+        deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("user");
+                reference.child(postId).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()){
+                            Toast.makeText(context, "Deleted successfully!",Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(context, "Failed to delete " + task.getException(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+                dialog.dismiss();
+            }
+        });
+
         dialog.show();
     }
 
