@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ItemsAdapter itemsAdapter;
     public static List<Data> dataList;
+    public static int totalQuantity;
 
     Button btnChangeAct;
 
@@ -132,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
                 itemsAdapter.notifyDataSetChanged();
 
                 // Update the balance
-                int totalQuantity = 0;
+                totalQuantity = 0;
                 for(DataSnapshot ds: snapshot.getChildren()){
                     Map<String,Object> map = (Map<String, Object>) ds.getValue();
                     Object total = map.get("quantity");
