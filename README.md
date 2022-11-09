@@ -1,10 +1,12 @@
 # MoneyTracker
 
-Students:
+**Students:**
 
 
-- Mario Aroca - 62518
-- Benjamin Guiloff - 62528
+- **Mario Aroca - 62518**
+- **Benjamin Guiloff - 62528**
+
+
 
 References:
 
